@@ -1,6 +1,6 @@
 # Auction-website_Python
 Its a simple auction site developed by using Django framework.
-List of ImplementedTask:
+## List of Implemented Task:
 UC1 Create user Account:It has been completed and working fully functional.
 UC2Edituser Account:Web application has the ability to update the account information email and password of the signed in user.
 UC3Create an Auction:Application has the functionality to create new auction if the user is logged in. otherwise visitor can only see all the available auctions which are not banned.
