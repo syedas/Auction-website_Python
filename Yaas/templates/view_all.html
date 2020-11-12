@@ -1,0 +1,99 @@
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title> All Auctions</title>
+</head>
+<body>
+<ul>
+<li>
+<a href="/myauction/">My Auctions</a></li>
+</li>
+<li>
+<a href="/allauction/">All Auctions</a></li>
+</li>
+{% if loggedin == 0 %}
+<li>
+<a href="/login/">Login</a></li>
+</li>
+{% endif %}
+{% if loggedin == 1 or loggedin == 2 %}
+<li>
+<a href="/logout/">Logout</a></li>
+</li>
+{% endif %}
+{% if loggedin == 0 %}
+<li>
+<a href="/newuser/">Create User</a></li>
+</li>
+{% endif %}
+<li>
+<a href="/createauctions/">New Auction</a></li>
+</li>
+<li>
+<a href="/editemail/">Edit Email</a></li>
+</li>
+<li>
+<a href="/editpswd/">Edit Password</a></li>
+</li>
+<li>
+<a href="/language/">Language</a></li>
+</li>
+</ul>
+<h1>YAAS</h1>
+<h2>All Auctions</h2><br><br>
+{{msg|default:""}}
+<br><br>
+ <form method="POST" action = "/search/">
+{% csrf_token %}
+
+  <div>
+    <label>
+      Enter Title to search:
+      <input type="text" name="title" value=""/>
+    </label>
+  </div>
+
+  <input type="submit" value="Submit"/>
+</form>
+{% for value in data %}
+<ul><li>
+ <a href="/myauction/{{ value.id }}" >
+<b>Title : {{ value.title }}</b>
+</a>
+</li></ul>
+{% if loggedin == 1 %}
+<ul>
+ <a href="/editauction/{{ value.id }}" >
+Edit</a>
+</ul>
+{% endif %}
+{% if loggedin == 2 %}
+<ul>
+<a href="/banauction/{{ value.id }}">Ban Auction</a>
+</ul>
+{% endif %}
+
+
+
+    <br>
+    Description : {{ value.desc }}
+    <br>
+    Deadline : {{ value.deadline }}
+    <br>
+
+    Auction Created by {{ value.authName }} at : {{ value.createdAt }}
+    <br><br>
+{% endfor %}
+
+    <br/><br/>
+<div> Session start date: {{req.session_start}}</div>
+<div>Auction visited: {{req.blog_visited}}</div>
+<div>Auction edited: {{req.blog_edited}}</div>
+<div>Auction created: {{req.blog_created}}</div>
+<div>Auction deleted: {{req.blog_deleted}}</div>
+<form action="/reset" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Reset">
+</form>
+</body>
+</html>

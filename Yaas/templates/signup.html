@@ -1,0 +1,42 @@
+<form method="post" and action="/newuser/">
+  {% csrf_token %}
+<h1>YAAS</h1>
+    <h2>Create New User</h2><br><br>
+  <div>
+    <label>
+      Name
+      <input type="text" name="name" value=""/>
+    </label>
+  </div>
+    <div>
+    <label>
+      User Name:
+      <input type="text" name="username" value="" required/>
+    </label>
+  </div>
+  <div>
+    <label>
+       Password:
+      <input type="password" name="password" value="" required/>
+    </label>
+  </div>
+   <div>
+    <label>
+      Email:
+      <input type="text" name="email" value="" required/>
+    </label>
+  </div>
+  <input type="submit" value="Create User"/>
+
+</form>
+    <br/><br/><br/><br/>
+
+<div> Session start date: {{req.session_start}}</div>
+<div>Auction visited: {{req.blog_visited}}</div>
+<div>Auction edited: {{req.blog_edited}}</div>
+<div>Auction created: {{req.blog_created}}</div>
+<div>Auction deleted: {{req.blog_deleted}}</div>
+<form action="/reset" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Reset">
+</form>

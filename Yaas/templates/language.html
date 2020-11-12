@@ -1,0 +1,29 @@
+
+<form method="POST" and action="/language/" >
+  {% csrf_token %}
+
+
+    <h1>YAAS</h1>
+    <h2>Change Your Language</h2><br><br>
+{{msg|default:""}}
+  <div>
+   <ul>
+<li>
+<a href="/language/en">English</a></li>
+</li>
+    {% comment %}   <li>
+<a href="/language/sv">Swedish</a></li>
+</li>{% endcomment %}
+       <li>
+<a href="/language/fi">Finnish</a></li>
+</li>
+       {% comment %}<li>
+<a href="/language/de">German</a></li>
+</li>{% endcomment %}
+       <li>
+<a href="/language/ar">Arabic</a></li>
+</li>
+</ul>
+   </div>
+</form>
+

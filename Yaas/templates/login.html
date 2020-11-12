@@ -1,0 +1,34 @@
+<form action="/login/" method="post">
+  {% csrf_token %}
+    <h1>YAAS</h1>
+    <h2>Create an Auction</h2><br><br>
+<h2>Enter User Credentials</h2>
+    <br><br>
+    <b>{{error}}</b>
+    <div>
+    <label>
+      User Name:
+      <input type="text" name="username" value="" required/>
+    </label>
+  </div>
+  <div>
+    <label>
+       Password:
+      <input type="password" name="password" value="" required/>
+    </label>
+  </div>
+
+  <input type="submit" value="Signin"/>
+
+</form>
+    <br/><br/><br/><br/>
+
+<div> Session start date: {{req.session_start}}</div>
+<div>Auction visited: {{req.blog_visited}}</div>
+<div>Auction edited: {{req.blog_edited}}</div>
+<div>Auction created: {{req.blog_created}}</div>
+<div>Auction deleted: {{req.blog_deleted}}</div>
+<form action="/reset" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Reset">
+</form>

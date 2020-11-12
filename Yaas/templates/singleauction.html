@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Auctions</title>
+</head>
+<body>
+<ul>
+<li>
+<a href="/myauction/">My Auctions</a></li>
+</li>
+<li>
+<a href="/allauction/">All Auctions</a></li>
+</li>
+{% if loggedin == 0 %}
+<li>
+<a href="/login/">Login</a></li>
+</li>
+{% endif %}
+{% if loggedin == 1 or loggedin == 2 %}
+<li>
+<a href="/logout/">Logout</a></li>
+</li>
+{% endif %}
+{% if loggedin == 0 %}
+<li>
+<a href="/newuser/">Create User</a></li>
+</li>
+{% endif %}
+<li>
+<a href="/createauctions/">New Auction</a></li>
+</li>
+<li>
+<a href="/editemail/">Edit Email</a></li>
+</li>
+<li>
+<a href="/editpswd/">Edit Password</a></li>
+</li>
+<li>
+<a href="/language/">Language</a></li>
+</li>
+</ul>
+<h1>YAAS</h1>
+<h2>Your Auction</h2><br><br>
+
+Auction ID: {{ data.id }}
+<br>
+Title : {{ data.title }}
+<br>
+Description: {{ data.desc }}
+<br>
+Minimum Price: {{ data.min_price }}
+<br>
+Deadline : {{ data.deadline }}
+<br>
+
+{% comment %}Seller : {{ value.seller }}{% endcomment %}
+Auction Created by {{ data.authName }} at : {{ data.createdAt }}
+    <br><br>
+<h2>Bid</h2><br><br>
+
+
+ {% for value in  bidData %}
+   Bid made by  {{ value.bidder }}  with value  {{ value.price }} at {{ value.time }}<br><br>
+
+    {% endfor %}
+
+<form method="POST" action = "/bid/{{ data.id }}">
+{% csrf_token %}
+
+  <div>
+    <label>
+      Enter Amount:
+      <input type="text" name="price" value=""/>
+    </label>
+  </div>
+
+  <input type="submit" value="Submit"/>
+</form>
+    <br/><br/><br/><br/>
+<div> Session start date: {{req.session_start}}</div>
+<div>Auction visited: {{req.blog_visited}}</div>
+<div>Auction edited: {{req.blog_edited}}</div>
+<div>Auction created: {{req.blog_created}}</div>
+<div>Auction deleted: {{req.blog_deleted}}</div>
+<form action="/reset" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Reset">
+</form>
+</body>
+
+</html>

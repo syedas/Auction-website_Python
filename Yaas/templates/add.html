@@ -1,0 +1,79 @@
+
+
+<form  action="/createauctions/" method="post">
+  {% csrf_token %}
+    <ul>
+<li>
+<a href="/myauction/">My Auctions</a></li>
+</li>
+<li>
+<a href="/allauction/">All Auctions</a></li>
+</li>
+{% if loggedin == 0 %}
+<li>
+<a href="/login/">Login</a></li>
+</li>
+{% endif %}
+{% if loggedin == 1 %}
+<li>
+<a href="/logout/">Logout</a></li>
+</li>
+{% endif %}
+{% if loggedin == 0 %}
+<li>
+<a href="/newuser/">Create User</a></li>
+</li>
+{% endif %}
+<li>
+<a href="/createauctions/">New Auction</a></li>
+</li>
+<li>
+<a href="/editemail/">Edit Email</a></li>
+</li>
+<li>
+<a href="/editpswd/">Edit Password</a></li>
+</li>
+</ul>
+  <h1>YAAS</h1>
+    <h2>Create an Auction</h2><br><br>
+
+<b>You cannot create new auction if you are not logged in.</b>
+
+  <div>
+    <label>
+      Title: 
+      <input type="text" name="title" value="{{data.title|default:""}}"/>
+    </label>
+  </div>
+  <div>
+    <label>
+       Description:
+      <textarea type="text" name="desc">{{data.desc|default:""}}</textarea>
+    </label>
+  </div>
+      <div>
+    <label>
+      Minimum Price:
+      <input type="text" name="minprice" value="{{data.title|default:""}}"/>
+    </label>
+  </div>
+    <div>
+    <label>
+      date:
+      <input type="datetime-local" class="form-control" id="deadline" name="deadline">
+    </label>
+  </div>
+  <input type="submit" value="Submit"/>
+</form>
+    <br/><br/><br/><br/>
+
+<div> Session start date: {{req.session_start}}</div>
+<div>Auction visited: {{req.blog_visited}}</div>
+<div>Auction edited: {{req.blog_edited}}</div>
+<div>Auction created: {{req.blog_created}}</div>
+<div>Auction deleted: {{req.blog_deleted}}</div>
+<form action="/reset" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Reset">
+</form>
+
